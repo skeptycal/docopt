@@ -8,11 +8,15 @@ import pytest
 
 import docopt
 
+pt_version_under_54 = float('.'.join(pytest.__version__.split('.')[0:2])) < 5.4
 
 def pytest_collect_file(path, parent):
-    if path.ext == ".docopt" and path.basename.startswith("test"):
-        return DocoptTestFile(path, parent)
-
+    if pt_version_under_54:
+        if path.ext == ".docopt" and path.basename.startswith("test"):
+            return DocoptTestFile(path, parent)
+    else:
+        if path.ext == ".docopt" and path.basename.startswith("test"):
+            return DocoptTestFile.from_parent(parent=parent, fspath=path)
 
 def parse_test(raw):
     raw = re.compile('#.*$', re.M).sub('', raw).strip()
@@ -31,7 +35,6 @@ def parse_test(raw):
 
         yield name, doc, cases
 
-
 class DocoptTestFile(pytest.File):
 
     def collect(self):
@@ -41,9 +44,17 @@ class DocoptTestFile(pytest.File):
         for name, doc, cases in parse_test(raw):
             name = self.fspath.purebasename
             for case in cases:
-                yield DocoptTestItem("%s(%d)" % (name, index), self, doc, case)
+                if pt_version_under_54:
+                    yield DocoptTestItem("%s(%d)" % (name, index), self, doc, case)
+                else:
+                    test_item = "%s(%d)" % (name, index)
+                    kw = {
+                        'name': test_item,
+                        'doc': doc,
+                        'case': case,
+                        }
+                    yield DocoptTestItem.from_parent(parent=self.parent, **kw)
                 index += 1
-
 
 class DocoptTestItem(pytest.Item):
 
@@ -74,7 +85,6 @@ class DocoptTestItem(pytest.Item):
 
     def reportinfo(self):
         return self.fspath, 0, "usecase: %s" % self.name
-
 
 class DocoptTestException(Exception):
     pass
