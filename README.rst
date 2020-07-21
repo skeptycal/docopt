@@ -10,6 +10,10 @@
 Video introduction to **docopt**: `PyCon UK 2012: Create *beautiful*
 command-line interfaces with Python <http://youtu.be/pXhcPJK5cMc>`_
 
+    New in version 0.6.2:
+
+    - Updated to work with pytest >= 5.4
+
     New in version 0.6.1:
 
     - Fix issue `#85 <https://github.com/docopt/docopt/issues/85>`_
@@ -98,7 +102,10 @@ Use `pip <http://pip-installer.org>`_ or easy_install::
 Alternatively, you can just drop ``docopt.py`` file into your
 project--it is self-contained.
 
-**docopt** is tested with Python 2.7, 3.4, 3.5, and 3.6.
+**docopt** is tested with Python 3.5, 3.6, 3.7, and 3.8.
+
+Although Python 2 is no longer officially supported, it was tested
+with Python 2.7 until summer 2020 and may still serve your needs.
 
 Testing
 ======================================================================

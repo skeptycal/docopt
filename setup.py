@@ -23,22 +23,28 @@ setup(
     name='docopt',
     version=__version__,
     author='Vladimir Keleshev',
+    maintainer='Michael Treanor',
     author_email='vladimir@keleshev.com',
-    description='Pythonic argument parser, that will make you smile',
+    maintainer_email='skeptycal@gmail.com',
+    description='Pythonic argument parser that will make you smile.',
     license='MIT',
     keywords='option arguments parsing optparse argparse getopt',
     url='http://docopt.org',
     py_modules=['docopt'],
     long_description=open('README.rst').read(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        "Development Status :: 5 - Production/Stable",
         'Topic :: Utilities',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
+        # Remove Python 2 official support
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'License :: OSI Approved :: MIT License',
     ],
     tests_require=[
