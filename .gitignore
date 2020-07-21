@@ -1,4 +1,6 @@
 *.py[co]
+**/*private*
+**/*bak*
 
 # Vim
 *.swp
